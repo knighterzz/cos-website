@@ -2,26 +2,302 @@
 @tailwind components;
 @tailwind utilities;
 
+/* --- Root Variables --- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #ffffff; /* Default background color */
+  --foreground: #171717; /* Default foreground color */
 }
 
+/* --- Dark Mode Support --- */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0a0a0a; /* Dark mode background color */
+    --foreground: #ededed; /* Dark mode foreground color */
   }
 }
 
+/* --- Body Styles --- */
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--foreground); /* Text color */
+  background: var(--background); /* Background color */
+  font-family: "Montserrat", sans-serif; /* Font family */
 }
 
+/* --- Utility Classes --- */
 @layer utilities {
   .text-balance {
-    text-wrap: balance;
+    text-wrap: balance; /* Text wrapping utility */
   }
+}
+
+/* --- Text Shadow Effect --- */
+.text-shadow {
+  text-shadow: 0px 2px 7px rgba(0, 0, 0, 0.5); /* Shadow for text */
+}
+
+/* --- Horizontal Text Movement Animation --- */
+@keyframes moveTextHorizontal {
+  0% {
+    transform: translateX(100%); /* Start off the right side */
+  }
+  100% {
+    transform: translateX(-100%); /* Move off the left side */
+  }
+}
+
+/* --- Navbar Height Adjustments --- */
+.header {
+  padding: 1rem 0; /* Default padding for all devices */
+  background-color: #d49f42; /* Set your gold background color here */
+  color: #1c1c1c; /* Set your text color */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Add shadow if needed */
+  transition: all 0.3s ease; /* Smooth transition */
+}
+
+@media (max-width: 1440px) {
+  .header {
+    padding: 0.75rem 0; /* Slightly reduced height */
+  }
+}
+@media (max-width: 1024px) {
+  .header {
+    padding: 0.5rem 0; /* More reduction in height */
+  }
+}
+@media (max-width: 768px) {
+  .header {
+    padding: 0.375rem 0; /* Further reduced height */
+  }
+}
+@media (max-width: 425px) {
+  .header {
+    padding: 0.25rem 0; /* Smaller height */
+  }
+}
+@media (max-width: 375px) {
+  .header {
+    padding: 0.125rem 0; /* Minimal height */
+  }
+}
+@media (max-width: 320px) {
+  .header {
+    padding: 0.1rem 0; /* Least height */
+  }
+}
+
+/* --- Hero Section Styles --- */
+.hero-section {
+  height: 80vh; /* Default height for larger screens */
+  display: flex; /* Flex properties for centering content */
+  align-items: center; /* Center items vertically */
+  justify-content: center; /* Center items horizontally */
+  position: relative; /* Positioning for absolute children */
+}
+
+/* Media Queries for Hero Section Height Adjustments */
+@media (max-width: 1024px) {
+  .hero-section {
+    height: 70vh;
+  }
+}
+@media (max-width: 640px) {
+  .hero-section {
+    height: 50vh;
+  }
+}
+@media (max-width: 425px) {
+  .hero-section {
+    height: 40vh;
+  }
+}
+@media (max-width: 375px) {
+  .hero-section {
+    height: 35vh;
+  }
+}
+@media (max-width: 320px) {
+  .hero-section {
+    height: 30vh;
+  }
+}
+
+/* --- Font Size Adjustments --- */
+/* Extra Large Devices (1440px and above) */
+@media (min-width: 1440px) {
+  body {
+    font-size: 1.125rem;
+  } /* Adjust base font size */
+  h1 {
+    font-size: 2rem;
+  } /* Font size for h1 */
+  h2 {
+    font-size: 1.75rem;
+  } /* Font size for h2 */
+  h3 {
+    font-size: 1.5rem;
+  } /* Font size for h3 */
+  button {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+  } /* Button styles */
+  .hero-image {
+    object-fit: cover;
+    width: 100%;
+    height: 80vh;
+  } /* Hero image settings */
+  section {
+    padding: 2rem 0;
+  } /* Section padding */
+}
+
+/* Large Devices (1024px and above) */
+@media (min-width: 1024px) {
+  body {
+    font-size: 0.9rem;
+  } /* Decrease base font size */
+  h1 {
+    font-size: 1.75rem;
+  } /* Font size for h1 */
+  h2 {
+    font-size: 1.5rem;
+  } /* Font size for h2 */
+  h3 {
+    font-size: 1.25rem;
+  } /* Font size for h3 */
+  button {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+  } /* Button styles */
+  img {
+    max-width: 100%;
+    height: auto;
+  } /* Image scaling */
+  .hero-image {
+    height: 70vh;
+  } /* Hero image height */
+  .container {
+    padding: 0 1rem;
+  } /* Container padding */
+  section {
+    margin-bottom: 2rem;
+  } /* Section margin */
+}
+
+/* Medium Devices (768px and above) */
+@media (min-width: 768px) {
+  body {
+    font-size: 0.875rem;
+  } /* Font size for medium devices */
+  h1 {
+    font-size: 1.5rem;
+  } /* Font size for h1 */
+  h2 {
+    font-size: 1.25rem;
+  } /* Font size for h2 */
+  h3 {
+    font-size: 1rem;
+  } /* Font size for h3 */
+  button {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.85rem;
+  } /* Button styles */
+  .hero-image {
+    height: 65vh;
+  } /* Hero image height */
+  section {
+    padding: 1.5rem 0;
+  } /* Section padding */
+}
+
+/* Small Devices (425px and above) */
+@media (min-width: 425px) {
+  body {
+    font-size: 0.875rem;
+  } /* Keep same font size as 768px */
+  .hero-image {
+    object-fit: cover;
+    width: 100vw;
+  } /* Full width hero image */
+  button {
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+  } /* Button styles */
+}
+
+/* Extra Small Devices (375px and above) */
+@media (min-width: 375px) {
+  body {
+    font-size: 0.75rem;
+  } /* Smaller font size for mobile */
+  h1 {
+    font-size: 1.25rem;
+  } /* Font size for h1 */
+  h2 {
+    font-size: 1rem;
+  } /* Font size for h2 */
+  h3 {
+    font-size: 0.875rem;
+  } /* Font size for h3 */
+  button {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.75rem;
+  } /* Button styles */
+  .hero-image {
+    height: 55vh;
+  } /* Hero image height */
+  section {
+    padding: 1rem 0;
+    width: 100vw;
+  } /* Section padding */
+}
+
+/* Extra Extra Small Devices (320px and below) */
+@media (max-width: 320px) {
+  body {
+    font-size: 0.625rem;
+  } /* Adjust font size for very small screens */
+  .hero-image {
+    height: 50vh;
+  } /* Hero image height */
+  button {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.625rem;
+  } /* Button styles */
+}
+
+/* --- FAQ Styles --- */
+.faq-container {
+  display: flex; /* Use flexbox for layout */
+  flex-direction: column; /* Vertical layout */
+  gap: 10px; /* Space between items */
+  background-color: #ffffff; /* White background */
+  border-radius: 8px; /* Rounded edges */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  padding: 15px; /* Initial padding */
+}
+
+.faq-item {
+  border-bottom: 1px solid #e2e8f0; /* Light border */
+  padding: 15px; /* Spacing */
+}
+
+.faq-question {
+  font-size: 1.25rem; /* Font size for question */
+  font-weight: bold; /* Bold text */
+  color: var(--foreground); /* Use theme color */
+}
+
+/* Responsive adjustment for FAQ */
+@media (max-width: 640px) {
+  .faq-question {
+    font-size: 1.125rem;
+  } /* Smaller font size for mobile */
+  .faq-item {
+    padding: 20px;
+  } /* More spacing on mobile */
+}
+
+.faq-answer {
+  padding-left: 20px; /* Indentation for the answer */
+  color: var(--foreground); /* Use theme color */
 }
