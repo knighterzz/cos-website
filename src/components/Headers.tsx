@@ -1,119 +1,86 @@
+// components/Header.tsx
 "use client";
 
-import { useEffect, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
-import { FaBars, FaTimes } from "react-icons/fa";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 
-const Header: React.FC = () => {
+const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const handleScroll = () => {
-    if (window.scrollY > 50) {
-      setIsScrolled(true);
-    } else {
-      setIsScrolled(false);
-    }
-  };
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // State for mobile menu
 
   useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 0);
     window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <header
-      className={`sticky top-0 bg-gold text-elegantBlack shadow-lg z-50 transition-all duration-300 ${
-        isScrolled ? "py-2" : "py-4"
+      className={`fixed w-full top-0 z-50 transition-colors duration-300 ${
+        isScrolled ? "bg-black bg-opacity-80" : "bg-transparent"
       }`}
     >
-      <nav
-        className={`container mx-auto flex justify-between items-center max-w-7xl transition-all duration-300 ${
-          isScrolled ? "px-4" : "px-6"
-        }`}
-      >
-        {/* Logo */}
-        <div className='flex items-center'>
+      <div className='flex items-center justify-between max-w-6xl mx-auto p-4'>
+        {/* Left Links - hidden on mobile */}
+        <div className='hidden sm:flex space-x-4'>
+          <Link href='/'>Home</Link>
+          <Link href='/about'>About Us</Link>
+        </div>
+
+        {/* Center Logo */}
+        <div className='flex-shrink-0'>
           <Image
-            src='/images/COS FLAT.png'
+            src='/images/COSFLAT.png'
             alt='Logo'
-            width={isScrolled ? 60 : 80}
-            height={isScrolled ? 60 : 80}
-            className={`transition-all duration-300 ${
-              isScrolled ? "ml-3" : "ml-7"
-            }`}
+            width={80}
+            height={32}
+            className='w-20 sm:w-24'
           />
         </div>
 
-        {/* Desktop Links */}
-        <div className='hidden md:flex justify-end space-x-6'>
-          <Link
-            href='/'
-            className={`text-lg font-semibold transition duration-300 ease-in-out transform hover:text-white ${
-              isScrolled ? "text-base" : "text-lg"
-            }`}
-          >
-            Home
-          </Link>
-          <Link
-            href='/faq'
-            className={`text-lg font-semibold transition duration-300 ease-in-out transform hover:text-white ${
-              isScrolled ? "text-base" : "text-lg"
-            }`}
-          >
-            FAQ
-          </Link>
-          <Link
-            href='/contacts'
-            className={`text-lg font-semibold transition duration-300 ease-in-out transform hover:text-white ${
-              isScrolled ? "text-base" : "text-lg"
-            }`}
-          >
-            Contact Us
-          </Link>
+        {/* Right Links - hidden on mobile */}
+        <div className='hidden sm:flex space-x-4'>
+          <Link href='/events'>Events</Link>
+          <Link href='/partnership'>Partnership</Link>
         </div>
 
-        {/* Hamburger Menu Icon */}
-        <div className='md:hidden'>
-          <button onClick={toggleMenu}>
-            {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+        {/* Mobile Menu Button */}
+        <div className='sm:hidden flex items-center'>
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className='p-2 focus:outline-none'
+            aria-label='Toggle Menu'
+          >
+            {/* Hamburger Icon */}
+            <div className='space-y-1'>
+              <span className='block w-6 h-0.5 bg-white'></span>
+              <span className='block w-6 h-0.5 bg-white'></span>
+              <span className='block w-6 h-0.5 bg-white'></span>
+            </div>
           </button>
         </div>
+      </div>
 
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className='absolute top-full left-0 w-full bg-gold text-elegantBlack flex flex-col items-center py-4 space-y-4 md:hidden'>
-            <Link
-              href='/'
-              onClick={toggleMenu}
-              className='text-lg font-semibold hover:text-darkSand'
-            >
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className='sm:hidden bg-black bg-opacity-90'>
+          <nav className='flex flex-col items-center space-y-4 py-4'>
+            <Link href='/' onClick={() => setIsMenuOpen(false)}>
               Home
             </Link>
-            <Link
-              href='/faq'
-              onClick={toggleMenu}
-              className='text-lg font-semibold hover:text-darkSand'
-            >
-              FAQ
+            <Link href='/about' onClick={() => setIsMenuOpen(false)}>
+              About Us
             </Link>
-            <Link
-              href='/contacts'
-              onClick={toggleMenu}
-              className='text-lg font-semibold hover:text-darkSand'
-            >
-              Contact Us
+            <Link href='/events' onClick={() => setIsMenuOpen(false)}>
+              Events
             </Link>
-          </div>
-        )}
-      </nav>
+            <Link href='/partnership' onClick={() => setIsMenuOpen(false)}>
+              Partnership
+            </Link>
+          </nav>
+        </div>
+      )}
     </header>
   );
 };

@@ -1,44 +1,55 @@
-import TikTokEmbedComponent from "@/components/TikTokEmbedComponent";
-import Link from "next/link";
+// app/page.tsx
+import Footer from "@/components/Footers";
+import ImageCarousel from "@/components/ImageCarousel"; // Import the carousel component
 import Image from "next/image";
+import Link from "next/link";
 
-export default function Home() {
+const images = [
+  { src: "/images/bigpic.png", alt: "Image 1" },
+  { src: "/images/party1.jpeg", alt: "Image 2" },
+  { src: "/images/cos.jpg", alt: "Image 3" },
+];
+
+export default function HomePage() {
   return (
     <div>
-      {/* Hero Section with Image Inside */}
-      <section className='hero-section flex items-center justify-center text-white text-center relative'>
-        {/* Image Element */}
-        <Image
-          src='/images/bigpic.png'
-          alt='Hero Image'
-          layout='fill'
-          objectFit='cover' // Ensure this is present
-          className='hero-image z-0' // Add your custom class here
-        />
-      </section>
-
-      {/* Button Section - Close to Hero Section */}
-      <section className='flex items-center justify-center py-8'>
-        <Link
-          href='https://artatix.co.id/event/cleopatra'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          <button className='bg-gold text-black py-3 px-6 text-lg font-semibold hover:bg-yellow-400 shadow-lg hover:shadow-xl transition-shadow duration-300'>
-            Get Your Tickets Now
-          </button>
-        </Link>
-      </section>
-
-      {/* TikTok Embed Section */}
-      <section className='flex justify-center items-center my-12'>
-        <div className='max-w-xl'>
-          <h2 className='text-3xl font-bold text-center mb-6'>
-            Check out this TikTok video
+      <ImageCarousel images={images} />
+      <div className='py-12 text-center'>
+        {/* Ticket Buying Section */}
+        <section className='py-8'>
+          <div className='max-w-6xl mx-auto px-4 text-center'>
+            <h2 className='text-2xl sm:text-3xl lg:text-4xl font-bold mb-4'>
+              Get Your Tickets Now!
+            </h2>
+            <p className='text-base sm:text-lg lg:text-xl mb-6'>
+              Join us for an unforgettable experience at the Carnaval Of Scream!
+              Grab your tickets today and be part of the excitement!
+            </p>
+            <Link href='https://artatix.co.id/event/cleopatra'>
+              <button className='bg-deepPurple text-white py-2 px-4 rounded hover:bg-purple-600 transition text-base sm:text-lg'>
+                Buy Tickets
+              </button>
+            </Link>
+          </div>
+        </section>
+        {/* Our Programs Section */}
+        <div className='text-center'>
+          <h2 className='text-2xl sm:text-3xl lg:text-4xl font-bold mb-4'>
+            Our Past Events
           </h2>
-          <TikTokEmbedComponent url='https://www.tiktok.com/@carnavalofscreams/video/7421858961449618694' />
+          <Link href='/events' className='inline-block'>
+            {" "}
+            {/* Update with the correct link */}
+            <Image
+              src='/images/clownan.png' // Update with your logo path
+              alt='Last Program Logo'
+              width={200} // Base width
+              height={100} // Base height
+              className='mx-auto max-w-full h-auto' // Responsive styles
+            />
+          </Link>
         </div>
-      </section>
+      </div>
     </div>
   );
 }
